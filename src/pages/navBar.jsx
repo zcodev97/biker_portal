@@ -64,8 +64,8 @@ function NavBar() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-dark rounded p-2">
-        <div className="container-fluid d-flex justify-content-between">
+      <nav className="navbar navbar-expand-sm navbar-dark rounded ">
+        <div className="container-fluid  d-flex justify-content-between">
           {/* Start of the main navbar content */}
 
           <Link className="nav-link text-primary" to="/home">
@@ -75,7 +75,7 @@ function NavBar() {
           </Link>
 
           <button
-            className="navbar-toggler bg-dark"
+            className="navbar-toggler bg-primary"
             type="button"
             data-toggle="collapse"
             data-target="#navbarNav"
@@ -93,29 +93,27 @@ function NavBar() {
             <ul className="navbar-nav text-center">
               <li className="nav-item rounded m-1">
                 <Link className={navLinkClassName} to="/home">
-                  <h5>الصفحة الرئيسية</h5>
+                  <h3>الصفحة الرئيسية</h3>
                 </Link>
               </li>
               <li className="nav-item rounded border-4 m-1">
-                <Link className={navLinkClassName} to="/users">
-                  <h5>المكافئات</h5>
+                <Link className={navLinkClassName} to="/compensations">
+                  <h3>المكافئات</h3>
                 </Link>
               </li>
               <li className="nav-item rounded border-4 m-1">
-                <Link className={navLinkClassName} to="/vendors">
-                  <h5>العقوبات</h5>
+                <Link className={navLinkClassName} to="/penalties">
+                  <h3>العقوبات</h3>
                 </Link>
               </li>
-              <li className="nav-item btn m-1 p-2 border border-1 rounded">
-                👤<b> {localStorage.getItem("username")}</b>
-              </li>
+
               <li className="nav-item rounded m-1">
                 <Link
                   className="nav-link  text-center rounded p-2 border  border-danger"
                   to="/login"
                   onClick={handleLogout}
                 >
-                  <b>📤</b>
+                  <h1>📤</h1>
                 </Link>
               </li>
             </ul>

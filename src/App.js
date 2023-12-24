@@ -5,6 +5,8 @@ import { Biker_System_URL } from "./global";
 import HomePage from "./pages/Home";
 import Login from "./pages/Login";
 import NoPage from "./pages/NoPage";
+import CompensationsPage from "./pages/Compensations";
+import PenaltiesPage from "./pages/Penalties";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -52,7 +54,7 @@ function App() {
   }, []);
 
   return (
-    <div className="container-fluid bg-light" style={{ height: "100vh" }}>
+    <div className="container-fluid" style={{ height: "100vh" }}>
       <BrowserRouter>
         <Routes>
           <Route
@@ -63,6 +65,8 @@ function App() {
           />
 
           <Route path="/home" element={<HomePage />} />
+          <Route path="/compensations" element={<CompensationsPage />} />
+          <Route path="/penalties" element={<PenaltiesPage />} />
           <Route path="/login" element={<Login />} />
 
           <Route path="*" element={<NoPage />} />

@@ -2,6 +2,11 @@
     table-layout: auto !important;
   }
 
+  /* .table-bordered {
+    border-color: white !important;
+    border: none;
+  } */
+
 
 /* .btn:hover {
     background-color: grey !important;

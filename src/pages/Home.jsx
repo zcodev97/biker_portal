@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "./loading";
 import { Biker_System_URL } from "../global";
@@ -7,47 +7,80 @@ import NavBar from "./navBar";
 function HomePage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [year, setYear] = useState("");
-  const [month, setMonth] = useState("");
-  const [day, setDay] = useState("");
-  const [userData, setUserData] = useState({});
 
-  async function handleLogout() {
+  const [data, setData] = useState({});
+  const [overViewData, setOverViewData] = useState({});
+
+  const [buttonStyle1, setButtonStyle1] = useState("text-primary");
+  const [buttonStyle2, setButtonStyle2] = useState("text-dark");
+
+  async function GetUserMetricesData(week) {
     setLoading(true);
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    await fetch(Biker_System_URL + "portal/biker-metrics?week=" + week, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.detail === "Given token not valid for any token type") {
+          navigate("/login", { replace: true });
+          return;
+        }
+        if (data.detail) {
+          alert(data.detail);
+          return;
+        }
 
-    setLoading(false);
-    // console.log(showNavBar);
-    navigate("/login", { replace: true });
+        let tempTotalWeekOrders = 0;
+        for (const day in data) {
+          if (data.hasOwnProperty(day)) {
+            // Check if there are orders for the day
+            if (data[day].length > 0) {
+              // Sum the total orders for the day
+              tempTotalWeekOrders += data[day][0].total_orders;
+            }
+          }
+        }
+
+        setData(data);
+      })
+      .catch((error) => {
+        alert(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
-
-  async function handleGetUserData() {
+  async function GetMetricesOverview(week) {
     setLoading(true);
     await fetch(
-      Biker_System_URL +
-        "portal/biker-metrics?select_date=" +
-        year +
-        "-" +
-        month +
-        "-" +
-        day,
+      Biker_System_URL + "portal/biker-metrics-overview?week=" + week,
       {
         method: "GET",
         headers: {
           accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
       .then((response) => response.json())
       .then((data) => {
-        if (data.detail) {
-          alert(data.detail);
+        if (data.detail === "Given token not valid for any token type") {
+          navigate("/login", { replace: true });
           return;
         }
-        console.log(data);
-        setUserData(data);
+        if (data.detail) {
+          alert(data.detail);
+
+          return;
+        }
+
+        setOverViewData(data);
       })
       .catch((error) => {
         alert(error);
@@ -57,6 +90,11 @@ function HomePage() {
       });
   }
 
+  useEffect(() => {
+    GetUserMetricesData(0);
+    GetMetricesOverview(0);
+  }, []);
+
   return (
     <>
       {loading ? (
@@ -64,110 +102,213 @@ function HomePage() {
       ) : (
         <div className="container-fluid">
           <NavBar />
-          <div className="row">
-            <div className="col-md-4">
-              <div className="container-fluid mt-1">
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  id="email"
-                  placeholder="سنة"
-                  name="email"
-                  onChange={(event) => {
-                    setYear(event.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="container-fluid mt-1">
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  id="email"
-                  placeholder="شهر"
-                  name="email"
-                  onChange={(event) => {
-                    setMonth(event.target.value);
-                  }}
-                />
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="container-fluid mt-1">
-                <input
-                  type="text"
-                  className="form-control text-center"
-                  id="email"
-                  placeholder="يوم"
-                  name="email"
-                  onChange={(event) => {
-                    setDay(event.target.value);
-                  }}
-                />
-              </div>
-            </div>
-          </div>
 
-          <div className="container border border-2 rounded mt-1 mb-1">
-            <h5 className="text-center">
-              <b> تقرير بتاريخ</b>
-            </h5>
+          <div className="container text-center">
+            <h2>
+              <b> الصفحة الرئيسية </b>
+            </h2>
+          </div>
+          <div className="container text-end pt-2 pb-2 ">
+            <h3>
+              <b>{localStorage.getItem("biker_name") + " "}</b>👤
+            </h3>
+
             <hr />
-            <div className="container text-center">
-              <h5> {year + "-" + month + "-" + day}</h5>
+          </div>
+          <div className="row">
+            <div className="col-sm-6">
+              <div
+                className={
+                  "container btn text-center   p-2 mt-2 " + buttonStyle1
+                }
+                onClick={() => {
+                  setButtonStyle1("text-primary");
+                  setButtonStyle2("text-dark");
+                  GetUserMetricesData(0);
+                  GetMetricesOverview(0);
+                }}
+              >
+                <h1>هذا الأسبوع</h1>
+              </div>
+            </div>
+            <div className="col-sm-6">
+              <div
+                className={
+                  "container btn text-center  p-2 mt-2 " + buttonStyle2
+                }
+                onClick={() => {
+                  setButtonStyle2("text-primary");
+                  setButtonStyle1("text-dark");
+                  GetUserMetricesData(1);
+                  GetMetricesOverview(1);
+                }}
+              >
+                <h1> الأسبوع السابق</h1>
+              </div>
             </div>
           </div>
 
-          <div className="container text-dark text-center">
-            <table className="table table-bordered">
-              <tbody>
-                <tr>
-                  <td> {userData.biker_id}</td>
-                  <td>بايكر ايدي</td>
-                </tr>
-                <tr>
-                  <td> {userData.name}</td>
-                  <td> أسم البايكر</td>
-                </tr>
+          <hr />
 
-                <tr>
-                  <td> {userData.total_orders}</td>
-                  <td> عدد الطبات</td>
-                </tr>
-
-                <tr>
-                  <td> {userData.dt}</td>
-                  <td> وقت التوصيل</td>
-                </tr>
-                <tr>
-                  <td> {userData.offered}</td>
-                  <td> الطبات الكلية</td>
-                </tr>
-
-                <tr>
-                  <td> {userData.accepted}</td>
-                  <td> الطبات المقبولة</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
           <div className="container text-center">
-            <div
-              className="btn border border-success border-2 rounded mt-2 mb-2"
-              onClick={handleGetUserData}
-            >
-              تنفيذ
-            </div>
+            <h2>
+              <b>مخلص الأسبوع </b>
+            </h2>
+            {Object.entries(overViewData).length === 0 ? (
+              ""
+            ) : (
+              <table className="table text-center">
+                <tbody>
+                  <tr>
+                    <td>
+                      <h3> {overViewData.delivered_orders} </h3>
+                    </td>
+                    <td>
+                      <h3> الطلبات الواصلة </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h3> {overViewData.offered_orders} </h3>
+                    </td>
+                    <td>
+                      <h3> الطلبات المعروضة </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <b>
+                        <h3> {overViewData.accepted_orders} </h3>
+                      </b>
+                    </td>
+                    <td>
+                      <h3> الطلبات المقبولة </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h3>{parseFloat(overViewData.dt_avg).toFixed(2)}</h3>
+                    </td>
+                    <td>
+                      <h3> معدل وقت التوصيل </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h3 className="text-danger">
+                        {"- " + overViewData.penalty_amount.toLocaleString()}
+                      </h3>
+                    </td>
+                    <td>
+                      <h3 className="text-danger"> العقوبات </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h3> {overViewData.penalties} </h3>
+                    </td>
+                    <td>
+                      <h3> عدد العقوبات </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h3 className="text-success">
+                        {"+ " +
+                          overViewData.compensation_amount.toLocaleString()}
+                      </h3>
+                    </td>
+                    <td>
+                      <h3 className="text-success"> التعويضات </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h3> {overViewData.compensations} </h3>{" "}
+                    </td>
+                    <td>
+                      <h3> عدد التعويضات </h3>{" "}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
           </div>
-          <div className="container text-center">
-            <div
-              className="btn  rounded border border-2 border-danger mt-2 mb-2"
-              onClick={handleLogout}
-            >
-              تسجيل خروج
+          {Object.entries(data).map(([day, dayData]) => (
+            <div className="container text-center border rounded p-4 mt-1">
+              <h3 style={{ fontSize: "30px" }}>
+                {day === "Sunday"
+                  ? "الأحد"
+                  : day === "Monday"
+                  ? "الأثنين"
+                  : day === "Tuesday"
+                  ? "الثلاثاء"
+                  : day === "Wednesday"
+                  ? "الاربعاء"
+                  : day === "Thursday"
+                  ? "الخميس"
+                  : day === "Friday"
+                  ? "الجمعة"
+                  : "السبت"}
+              </h3>
+              {dayData.map((item, index) => (
+                <table className="table  table-striped text-center ">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h3> {item.total_orders} </h3>
+                      </td>
+                      <td>
+                        <h3> الطلبات الكلية </h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h3> {item.accepted} </h3>
+                      </td>
+                      <td>
+                        <h3> الطلبات الواصلة </h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>
+                          <h3> {item.dt} </h3>
+                        </b>
+                      </td>
+                      <td>
+                        <h3>وقت التوصيل </h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h3>{item.offered} </h3>
+                      </td>
+                      <td>
+                        <h3> الطلبات المعروضة </h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h3> {item.accepted}</h3>
+                      </td>
+                      <td>
+                        <h3> الطلبات المقبولة </h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <h3> {item.date_added} </h3>
+                      </td>
+                      <td>
+                        <h3> التاريخ </h3>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              ))}
             </div>
-          </div>
+          ))}
         </div>
       )}
     </>

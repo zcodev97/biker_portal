@@ -59,20 +59,18 @@ function Login() {
 
   return (
     <>
-      <form>
-        <div className="container-fluid bg-primary text-white p-2 mb-5 text-center rounded">
-          <h2>
-            <b>BALY</b>
-          </h2>
-        </div>
-        <div className="container text-center p-4 text-primary">
-          <h1>
-            <b>Biker Portal </b>
-          </h1>
-        </div>
-        <div className="container p-4 border rounded text-center text-dark">
-          <div className="container border   border-3 pt-4 pb-4  rounded-circle">
-            <h3>صفحة تسجيل الدخول </h3>
+      <form
+        style={{
+          minHeight: window.innerHeight,
+          display: "grid",
+          alignItems: "center",
+        }}
+      >
+        <div className="container p-4     text-center text-dark">
+          <div className="container text-primary  pt-4 pb-4 mb-4 rounded-circle">
+            <h2>
+              <b> BALY </b>
+            </h2>
           </div>
           <div className="row d-flex justify-content-center align-items-center p-4 m-1">
             <div className="col-md-6 m-1">
@@ -80,6 +78,7 @@ function Login() {
                 <input
                   type="text"
                   className="form-control text-center"
+                  style={{ backgroundColor: "#e6e6e6" }}
                   id="email"
                   placeholder="أسم المستخدم"
                   name="email"
@@ -92,6 +91,7 @@ function Login() {
                 <input
                   type="password"
                   className="form-control text-center"
+                  style={{ backgroundColor: "#e6e6e6" }}
                   id="pwd"
                   placeholder="كلمة السر"
                   name="pswd"
@@ -102,7 +102,7 @@ function Login() {
           </div>
 
           <button
-            className="btn btn-light border boder-light border-2 "
+            className="btn btn-primary "
             onClick={async () => {
               await checkIfUsernameAndPasswordIsCorrect();
             }}
@@ -110,7 +110,7 @@ function Login() {
               await checkIfUsernameAndPasswordIsCorrect();
             }}
           >
-            تسجيل الدخول
+            <b> دخول</b>
           </button>
         </div>
       </form>
