@@ -35,6 +35,8 @@ function HomePage() {
           return;
         }
 
+        console.log(data);
+
         let tempTotalWeekOrders = 0;
         for (const day in data) {
           if (data.hasOwnProperty(day)) {
@@ -234,7 +236,7 @@ function HomePage() {
               </table>
             )}
           </div>
-          {Object.entries(data).map(([day, dayData]) => (
+          {/* {data.map(([day, dayData]) => (
             <div className="container text-center border rounded p-4 mt-1">
               <h3 style={{ fontSize: "30px" }}>
                 {day === "Sunday"
@@ -308,7 +310,7 @@ function HomePage() {
                 </table>
               ))}
             </div>
-          ))}
+          ))} */}
         </div>
       )}
     </>
