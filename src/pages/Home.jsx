@@ -102,215 +102,197 @@ function HomePage() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="container-fluid">
+        <div className="container-fluid m-0 p-0">
           <NavBar />
 
-          <div className="container text-center">
-            <h2>
-              <b> الصفحة الرئيسية </b>
-            </h2>
+          <div className="container-fluid text-center">
+            <h5>الصفحة الرئيسية</h5>
           </div>
+          <hr />
           <div className="container text-end pt-2 pb-2 ">
-            <h3>
+            <h4 style={{ color: "#666666" }}>
               <b>{localStorage.getItem("biker_name") + " "}</b>👤
-            </h3>
-
-            <hr />
+            </h4>
           </div>
-          <div className="row">
-            <div className="col-sm-6">
-              <div
-                className={
-                  "container btn text-center   p-2 mt-2 " + buttonStyle1
-                }
-                onClick={() => {
-                  setButtonStyle1("text-primary");
-                  setButtonStyle2("text-dark");
-                  GetUserMetricesData(0);
-                  GetMetricesOverview(0);
-                }}
-              >
-                <h1>هذا الأسبوع</h1>
+          <div className="row p-0 m-0">
+            <div className="col-6 text-right m-0 ">
+              <div className="next">
+                <div
+                  className={"container btn text-center" + buttonStyle2}
+                  onClick={() => {
+                    setButtonStyle2("text-primary");
+                    setButtonStyle1("text-dark");
+                    GetUserMetricesData(1);
+                    GetMetricesOverview(1);
+                  }}
+                >
+                  <h4> الأسبوع السابق</h4>
+                </div>
               </div>
             </div>
-            <div className="col-sm-6">
-              <div
-                className={
-                  "container btn text-center  p-2 mt-2 " + buttonStyle2
-                }
-                onClick={() => {
-                  setButtonStyle2("text-primary");
-                  setButtonStyle1("text-dark");
-                  GetUserMetricesData(1);
-                  GetMetricesOverview(1);
-                }}
-              >
-                <h1> الأسبوع السابق</h1>
+            <div className="col-6 text-left m-0">
+              <div className="previous">
+                <div
+                  className={"container btn text-center" + buttonStyle1}
+                  onClick={() => {
+                    setButtonStyle1("text-primary");
+                    setButtonStyle2("text-dark");
+                    GetUserMetricesData(0);
+                    GetMetricesOverview(0);
+                  }}
+                >
+                  <h4>هذا الأسبوع</h4>
+                </div>
               </div>
             </div>
           </div>
 
           <hr />
 
-          <div className="container text-center">
-            <h2>
-              <b>مخلص الأسبوع </b>
-            </h2>
+          <div className="container-fluid text-center">
             {Object.entries(overViewData).length === 0 ? (
               ""
             ) : (
-              <table className="table text-center">
+              <table className="table table-sm text-center p-0">
                 <tbody>
                   <tr>
-                    <td>
-                      <h3> {overViewData.delivered_orders} </h3>
-                    </td>
-                    <td>
-                      <h3> الطلبات الواصلة </h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h3> {overViewData.offered_orders} </h3>
-                    </td>
-                    <td>
-                      <h3> الطلبات المعروضة </h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <b>
-                        <h3> {overViewData.accepted_orders} </h3>
-                      </b>
-                    </td>
-                    <td>
-                      <h3> الطلبات المقبولة </h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h3>{parseFloat(overViewData.dt_avg).toFixed(2)}</h3>
-                    </td>
-                    <td>
-                      <h3> معدل وقت التوصيل </h3>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <h3 className="text-danger">
-                        {"- " + overViewData.penalty_amount.toLocaleString()}
+                    <td style={{ color: "#4d4d4d" }}>
+                      <h3>
+                        {" "}
+                        <b> {overViewData.delivered_orders} </b>
                       </h3>
                     </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <h3>
+                        {" "}
+                        <b> الطلبات الواصلة </b>{" "}
+                      </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ color: "#4d4d4d" }}>
+                      <h3>
+                        {" "}
+                        <b> {overViewData.offered_orders} </b>
+                      </h3>
+                    </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <h3>
+                        {" "}
+                        <b>الطلبات المعروضة </b>{" "}
+                      </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ color: "#4d4d4d" }}>
+                      <h3>
+                        {" "}
+                        <b>{overViewData.accepted_orders} </b>{" "}
+                      </h3>
+                    </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <h3>
+                        <b> الطلبات المقبولة</b>
+                      </h3>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ color: "#4d4d4d" }}>
+                      <h3>
+                        {" "}
+                        <b>
+                          {" "}
+                          {parseFloat(overViewData.dt_avg).toFixed(2)}{" "}
+                        </b>{" "}
+                      </h3>
+                    </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <h3>
+                        {" "}
+                        <b> معدل وقت التوصيل </b>{" "}
+                      </h3>
+                    </td>
+                  </tr>
+                  {/* <tr>
                     <td>
-                      <h3 className="text-danger"> العقوبات </h3>
+                      <p className="text-danger">
+                        {"- " + overViewData.penalty_amount.toLocaleString()}
+                      </p>
+                    </td>
+                    <td>
+                      <p className="text-danger"> العقوبات </p>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h3> {overViewData.penalties} </h3>
+                      <p> {overViewData.penalties} </p>
                     </td>
                     <td>
-                      <h3> عدد العقوبات </h3>
+                      <p> عدد العقوبات </p>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h3 className="text-success">
+                      <p className="text-success">
                         {"+ " +
                           overViewData.compensation_amount.toLocaleString()}
-                      </h3>
+                      </p>
                     </td>
                     <td>
-                      <h3 className="text-success"> التعويضات </h3>
+                      <p className="text-success"> التعويضات </p>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h3> {overViewData.compensations} </h3>{" "}
+                      <p> {overViewData.compensations} </p>{" "}
                     </td>
                     <td>
-                      <h3> عدد التعويضات </h3>{" "}
+                      <p> عدد التعويضات </p>{" "}
                     </td>
-                  </tr>
+                  </tr> */}
                 </tbody>
               </table>
             )}
           </div>
-          {/* {data.map(([day, dayData]) => (
-            <div className="container text-center border rounded p-4 mt-1">
-              <h3 style={{ fontSize: "30px" }}>
-                {day === "Sunday"
-                  ? "الأحد"
-                  : day === "Monday"
-                  ? "الأثنين"
-                  : day === "Tuesday"
-                  ? "الثلاثاء"
-                  : day === "Wednesday"
-                  ? "الاربعاء"
-                  : day === "Thursday"
-                  ? "الخميس"
-                  : day === "Friday"
-                  ? "الجمعة"
-                  : "السبت"}
-              </h3>
-              {dayData.map((item, index) => (
-                <table className="table  table-striped text-center ">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <h3> {item.total_orders} </h3>
-                      </td>
-                      <td>
-                        <h3> الطلبات الكلية </h3>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h3> {item.accepted} </h3>
-                      </td>
-                      <td>
-                        <h3> الطلبات الواصلة </h3>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <b>
-                          <h3> {item.dt} </h3>
-                        </b>
-                      </td>
-                      <td>
-                        <h3>وقت التوصيل </h3>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h3>{item.offered} </h3>
-                      </td>
-                      <td>
-                        <h3> الطلبات المعروضة </h3>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h3> {item.accepted}</h3>
-                      </td>
-                      <td>
-                        <h3> الطلبات المقبولة </h3>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h3> {item.date_added} </h3>
-                      </td>
-                      <td>
-                        <h3> التاريخ </h3>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+
+          <table
+            className="
+          table table-striped text-center"
+          >
+            <thead>
+              <tr>
+                <td>وقت التوصيل</td>
+                <td>عدد الطلبات</td>
+
+                <td>اليوم</td>
+              </tr>
+            </thead>
+
+            <tbody className="text-dark">
+              {data.map((i) => (
+                <tr>
+                  <td>{i.dt}</td>
+                  <td>{i.total_orders}</td>
+
+                  <td>
+                    {i.week_day === "Sunday"
+                      ? "الأحد"
+                      : i.week_day === "Monday"
+                      ? "الأثنين"
+                      : i.week_day === "Tuesday"
+                      ? "الثلاثاء"
+                      : i.week_day === "Wednesday"
+                      ? "الاربعاء"
+                      : i.week_day === "Thursday"
+                      ? "الخميس"
+                      : i.week_day === "Friday"
+                      ? "الجمعة"
+                      : "السبت"}
+                  </td>
+                </tr>
               ))}
-            </div>
-          ))} */}
+            </tbody>
+          </table>
         </div>
       )}
     </>

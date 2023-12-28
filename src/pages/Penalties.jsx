@@ -56,9 +56,7 @@ function PenaltiesPage() {
         <div className="container-fluid">
           <NavBar />
           <div className="container text-center">
-            <h2>
-              <b> العقوبات </b>
-            </h2>
+            <h2>العقوبات</h2>
           </div>
           <div className="container text-end pt-2 pb-2 ">
             <h3>
@@ -67,95 +65,77 @@ function PenaltiesPage() {
 
             <hr />
           </div>
-          <div className="row">
-            <div className="col-sm-6">
-              <div
-                className={
-                  "container btn text-center   p-2 mt-2 " + buttonStyle1
-                }
-                onClick={() => {
-                  setButtonStyle1("text-primary");
-                  setButtonStyle2("text-dark");
-                  GetUserMetricesData(0);
-                }}
-              >
-                <h1>هذا الأسبوع</h1>
+          <div className="row p-0 m-0">
+            <div className="col-6 text-right m-0 ">
+              <div className="next">
+                <div
+                  className={"container btn text-center" + buttonStyle2}
+                  onClick={() => {
+                    setButtonStyle2("text-primary");
+                    setButtonStyle1("text-dark");
+                  }}
+                >
+                  <h4> الأسبوع السابق</h4>
+                </div>
               </div>
             </div>
-            <div className="col-sm-6">
-              <div
-                className={
-                  "container btn text-center  p-2 mt-2 " + buttonStyle2
-                }
-                onClick={() => {
-                  setButtonStyle2("text-primary");
-                  setButtonStyle1("text-dark");
-                  GetUserMetricesData(1);
-                }}
-              >
-                <h1> الأسبوع السابق</h1>
+            <div className="col-6 text-left m-0">
+              <div className="previous">
+                <div
+                  className={"container btn text-center" + buttonStyle1}
+                  onClick={() => {
+                    setButtonStyle1("text-primary");
+                    setButtonStyle2("text-dark");
+                  }}
+                >
+                  <h4>هذا الأسبوع</h4>
+                </div>
               </div>
             </div>
           </div>
 
           <hr />
 
-          {Object.entries(data).map(([day, dayData]) => (
-            <div className="container text-center border rounded p-4 mt-1">
-              <h3 style={{ fontSize: "30px" }}>
-                {day === "Sunday"
-                  ? "الأحد"
-                  : day === "Monday"
-                  ? "الأثنين"
-                  : day === "Tuesday"
-                  ? "الثلاثاء"
-                  : day === "Wednesday"
-                  ? "الاربعاء"
-                  : day === "Thursday"
-                  ? "الخميس"
-                  : day === "Friday"
-                  ? "الجمعة"
-                  : "السبت"}
-              </h3>
+          <table
+            className="
+          table table-striped text-center"
+          >
+            <thead>
+              <tr>
+                <td> التاريخ </td>
+                <td> مقدار المكافئة </td>
+                <td> السبب</td>
 
-              <table className="table">
-                <thead>
-                  <tr>
-                    <td>
-                      <h3> تاريخ العقوبة </h3>
-                    </td>
+                <td>اليوم</td>
+              </tr>
+            </thead>
 
-                    <td>
-                      <h3> مقدار العقوبة </h3>
-                    </td>
-                    <td>
-                      <h3> سبب العقوبة</h3>
-                    </td>
-                  </tr>
-                </thead>
-              </table>
-              {dayData.map((item, index) => (
-                <table className="table  table-striped text-center ">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <b>
-                          <h3> {item.date} </h3>
-                        </b>
-                      </td>
+            <tbody className="text-dark">
+              {data.map((i) => (
+                <tr>
+                  <td>{i.date}</td>
+                  <td>{i.amount}</td>
+                  <td>{i.reason}</td>
 
-                      <td>
-                        <h3> {item.amount.toLocaleString()} </h3>
-                      </td>
-                      <td>
-                        <h3> {item.reason} </h3>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                  <td>
+                    {i.week_day === "Sunday"
+                      ? "الأحد"
+                      : i.week_day === "Monday"
+                      ? "الأثنين"
+                      : i.week_day === "Tuesday"
+                      ? "الثلاثاء"
+                      : i.week_day === "Wednesday"
+                      ? "الاربعاء"
+                      : i.week_day === "Thursday"
+                      ? "الخميس"
+                      : i.week_day === "Friday"
+                      ? "الجمعة"
+                      : "السبت"}
+                  </td>
+                </tr>
               ))}
-            </div>
-          ))}
+            </tbody>
+          </table>
         </div>
       )}
     </>
