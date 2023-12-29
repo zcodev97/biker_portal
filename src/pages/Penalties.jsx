@@ -8,10 +8,10 @@ function PenaltiesPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
-  const [buttonStyle1, setButtonStyle1] = useState("text-primary");
-  const [buttonStyle2, setButtonStyle2] = useState("text-dark");
+  const [buttonStyle1, setButtonStyle1] = useState(" text-primary ");
+  const [buttonStyle2, setButtonStyle2] = useState(" text-dark ");
 
   async function GetUserMetricesData(week) {
     setLoading(true);
@@ -56,12 +56,12 @@ function PenaltiesPage() {
         <div className="container-fluid">
           <NavBar />
           <div className="container text-center">
-            <h2>العقوبات</h2>
+            <h3>العقوبات</h3>
           </div>
           <div className="container text-end pt-2 pb-2 ">
-            <h3>
+            <p>
               <b>{localStorage.getItem("biker_name") + " "}</b>👤
-            </h3>
+            </p>
 
             <hr />
           </div>
@@ -69,31 +69,37 @@ function PenaltiesPage() {
             <div className="col-6 text-right m-0 ">
               <div className="next">
                 <div
-                  className={"container btn text-center" + buttonStyle2}
+                  className={"container btn text-center " + buttonStyle2}
                   onClick={() => {
-                    setButtonStyle2("text-primary");
-                    setButtonStyle1("text-dark");
+                    setButtonStyle2(" text-primary");
+                    setButtonStyle1(" text-dark");
                   }}
                 >
-                  <h4> الأسبوع السابق</h4>
+                  <p> الأسبوع السابق</p>
                 </div>
               </div>
             </div>
             <div className="col-6 text-left m-0">
               <div className="previous">
                 <div
-                  className={"container btn text-center" + buttonStyle1}
+                  className={"container btn text-center " + buttonStyle1}
                   onClick={() => {
-                    setButtonStyle1("text-primary");
-                    setButtonStyle2("text-dark");
+                    setButtonStyle1(" text-primary");
+                    setButtonStyle2(" text-dark");
                   }}
                 >
-                  <h4>هذا الأسبوع</h4>
+                  <p>هذا الأسبوع</p>
                 </div>
               </div>
             </div>
           </div>
 
+          <div className="container text-center">
+            {data.length === 0 ? "" : data[0] && data[0].date + "  👉  "}
+            {data.length === 0
+              ? ""
+              : data[data.length - 1] && data[data.length - 1].date}
+          </div>
           <hr />
 
           <table
@@ -103,7 +109,7 @@ function PenaltiesPage() {
             <thead>
               <tr>
                 <td> التاريخ </td>
-                <td> مقدار المكافئة </td>
+                <td> مقدار العقوبه </td>
                 <td> السبب</td>
 
                 <td>اليوم</td>

@@ -1,4 +1,4 @@
-const Biker_System_URL = "http://portal.foodbi.giize.com/api/";
+const Biker_System_URL = "https://portal.foodbi.giize.com/api/";
 
 async function LoginAPI() {
   var token = localStorage.getItem("token");

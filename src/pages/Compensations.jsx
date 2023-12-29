@@ -8,10 +8,10 @@ function CompensationsPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
-  const [buttonStyle1, setButtonStyle1] = useState("text-primary");
-  const [buttonStyle2, setButtonStyle2] = useState("text-dark");
+  const [buttonStyle1, setButtonStyle1] = useState(" text-primary ");
+  const [buttonStyle2, setButtonStyle2] = useState(" text-dark ");
 
   async function GetUserMetricesData(week) {
     setLoading(true);
@@ -60,9 +60,9 @@ function CompensationsPage() {
           </div>
           <hr />
           <div className="container text-end pt-2 pb-2 ">
-            <h4 style={{ color: "#666666" }}>
+            <p style={{ color: "#666666" }}>
               <b>{localStorage.getItem("biker_name") + " "}</b>👤
-            </h4>
+            </p>
           </div>
           <div className="row p-0 m-0">
             <div className="col-6 text-right m-0 ">
@@ -70,11 +70,11 @@ function CompensationsPage() {
                 <div
                   className={"container btn text-center" + buttonStyle2}
                   onClick={() => {
-                    setButtonStyle2("text-primary");
-                    setButtonStyle1("text-dark");
+                    setButtonStyle2(" text-primary ");
+                    setButtonStyle1(" text-dark ");
                   }}
                 >
-                  <h4> الأسبوع السابق</h4>
+                  <p> الأسبوع السابق</p>
                 </div>
               </div>
             </div>
@@ -83,14 +83,21 @@ function CompensationsPage() {
                 <div
                   className={"container btn text-center" + buttonStyle1}
                   onClick={() => {
-                    setButtonStyle1("text-primary");
-                    setButtonStyle2("text-dark");
+                    setButtonStyle1(" text-primary ");
+                    setButtonStyle2(" text-dark ");
                   }}
                 >
-                  <h4>هذا الأسبوع</h4>
+                  <p>هذا الأسبوع</p>
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="container text-center">
+            {data.length === 0 ? "" : data[0] && data[0].date + "  👉  "}
+            {data.length === 0
+              ? ""
+              : data[data.length - 1] && data[data.length - 1].date}
           </div>
 
           <hr />
