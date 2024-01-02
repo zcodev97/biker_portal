@@ -44,8 +44,49 @@ function PenaltiesPage() {
       });
   }
 
+  function formatDate(date) {
+    return date ? date.toISOString().split("T")[0] : null;
+  }
+
+  function getCurrentWeekDates() {
+    const currentDate = new Date();
+    const currentDay = currentDate.getDay();
+    const diff = currentDay - 0;
+    const startDate = new Date(currentDate);
+    startDate.setDate(currentDate.getDate() - diff);
+
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 6);
+
+    return { startDate, endDate };
+  }
+
+  function getPreviousWeekDates() {
+    const { startDate, endDate } = getCurrentWeekDates();
+
+    // Check if startDate and endDate are not undefined before formatting
+    const formattedStartDate = formatDate(startDate);
+    const formattedEndDate = formatDate(endDate);
+
+    const previousWeekStartDate = new Date(startDate);
+    previousWeekStartDate.setDate(startDate.getDate() - 7);
+
+    const previousWeekEndDate = new Date(endDate);
+    previousWeekEndDate.setDate(endDate.getDate() - 7);
+
+    return {
+      startDate: formatDate(previousWeekStartDate),
+      endDate: formatDate(previousWeekEndDate),
+    };
+  }
+  // Example usage
+  const [currentWeekDates, setcurrentWeekDates] = useState({});
+  const [previousWeekDates, setpreviousWeekDates] = useState({});
+
   useEffect(() => {
     GetUserMetricesData(0);
+    setcurrentWeekDates(getCurrentWeekDates());
+    setpreviousWeekDates(getPreviousWeekDates());
   }, []);
 
   return (
@@ -77,6 +118,10 @@ function PenaltiesPage() {
                   }}
                 >
                   <p> الأسبوع السابق</p>
+                  <p>
+                    {previousWeekDates.startDate} <br />
+                    {previousWeekDates.endDate}
+                  </p>
                 </div>
               </div>
             </div>
@@ -91,17 +136,21 @@ function PenaltiesPage() {
                   }}
                 >
                   <p>هذا الأسبوع</p>
+                  <p>
+                    {formatDate(currentWeekDates.startDate)} <br />
+                    {formatDate(currentWeekDates.endDate)}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="container text-center">
+          {/* <div className="container text-center">
             {data.length === 0 ? "" : data[0] && data[0].date + "  👉  "}
             {data.length === 0
               ? ""
               : data[data.length - 1] && data[data.length - 1].date}
-          </div>
+          </div> */}
           <hr />
 
           <div className="container">

@@ -97,55 +97,41 @@ function HomePage() {
         setLoading(false);
       });
   }
+  function formatDate(date) {
+    return date ? date.toISOString().split("T")[0] : null;
+  }
 
   function getCurrentWeekDates() {
-    const today = new Date();
+    const currentDate = new Date();
+    const currentDay = currentDate.getDay();
+    const diff = currentDay - 0;
+    const startDate = new Date(currentDate);
+    startDate.setDate(currentDate.getDate() - diff);
 
-    // Calculate the difference between the current day and Monday
-    const diff = today.getDay() === 0 ? -6 : 1 - today.getDay();
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 6);
 
-    const currentWeekStartDate = new Date(today);
-    currentWeekStartDate.setDate(today.getDate() + diff);
-
-    const currentWeekEndDate = new Date(today);
-    currentWeekEndDate.setDate(today.getDate() + diff + 6);
-
-    // Format dates as strings (assuming the desired format is DD-MM-YYYY)
-    const currentWeekStartDateStr = formatDate(currentWeekStartDate);
-    const currentWeekEndDateStr = formatDate(currentWeekEndDate);
-
-    return {
-      currentWeekStartDate: currentWeekStartDateStr,
-      currentWeekEndDate: currentWeekEndDateStr,
-    };
+    return { startDate, endDate };
   }
 
   function getPreviousWeekDates() {
-    const { currentWeekStartDate } = getCurrentWeekDates();
+    const { startDate, endDate } = getCurrentWeekDates();
 
-    const previousWeekStartDate = new Date(currentWeekStartDate);
-    previousWeekStartDate.setDate(previousWeekStartDate.getDate() - 7);
+    // Check if startDate and endDate are not undefined before formatting
+    const formattedStartDate = formatDate(startDate);
+    const formattedEndDate = formatDate(endDate);
 
-    const previousWeekEndDate = new Date(currentWeekStartDate);
-    previousWeekEndDate.setDate(previousWeekEndDate.getDate() - 1);
+    const previousWeekStartDate = new Date(startDate);
+    previousWeekStartDate.setDate(startDate.getDate() - 7);
 
-    // Format dates as strings (assuming the desired format is DD-MM-YYYY)
-    const previousWeekStartDateStr = formatDate(previousWeekStartDate);
-    const previousWeekEndDateStr = formatDate(previousWeekEndDate);
+    const previousWeekEndDate = new Date(endDate);
+    previousWeekEndDate.setDate(endDate.getDate() - 7);
 
     return {
-      previousWeekStartDate: previousWeekStartDateStr,
-      previousWeekEndDate: previousWeekEndDateStr,
+      startDate: formatDate(previousWeekStartDate),
+      endDate: formatDate(previousWeekEndDate),
     };
   }
-
-  function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}-${month}- ${year}`;
-  }
-
   // Example usage
   const [currentWeekDates, setcurrentWeekDates] = useState({});
   const [previousWeekDates, setpreviousWeekDates] = useState({});
@@ -189,8 +175,8 @@ function HomePage() {
                 >
                   <p> الأسبوع السابق</p>
                   <p>
-                    {previousWeekDates.previousWeekStartDate} <br />
-                    {previousWeekDates.previousWeekEndDate}
+                    {previousWeekDates.startDate} <br />
+                    {previousWeekDates.endDate}
                   </p>
                 </div>
               </div>
@@ -209,8 +195,8 @@ function HomePage() {
                 >
                   <p> هذا الأسبوع </p>
                   <p>
-                    {currentWeekDates.currentWeekStartDate} <br />
-                    {currentWeekDates.currentWeekEndDate}
+                    {formatDate(currentWeekDates.startDate)} <br />
+                    {formatDate(currentWeekDates.endDate)}
                   </p>
                 </div>
               </div>
