@@ -4,6 +4,11 @@ import Loading from "./loading";
 import { Biker_System_URL } from "../global";
 import NavBar from "./navBar";
 
+// text-wrap for table
+// ff rate for each day  for overview and selected week
+// add date range for selected week
+// sort days (edited)
+
 function HomePage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -93,9 +98,63 @@ function HomePage() {
       });
   }
 
+  function getCurrentWeekDates() {
+    const today = new Date();
+
+    // Calculate the difference between the current day and Monday
+    const diff = today.getDay() === 0 ? -6 : 1 - today.getDay();
+
+    const currentWeekStartDate = new Date(today);
+    currentWeekStartDate.setDate(today.getDate() + diff);
+
+    const currentWeekEndDate = new Date(today);
+    currentWeekEndDate.setDate(today.getDate() + diff + 6);
+
+    // Format dates as strings (assuming the desired format is DD-MM-YYYY)
+    const currentWeekStartDateStr = formatDate(currentWeekStartDate);
+    const currentWeekEndDateStr = formatDate(currentWeekEndDate);
+
+    return {
+      currentWeekStartDate: currentWeekStartDateStr,
+      currentWeekEndDate: currentWeekEndDateStr,
+    };
+  }
+
+  function getPreviousWeekDates() {
+    const { currentWeekStartDate } = getCurrentWeekDates();
+
+    const previousWeekStartDate = new Date(currentWeekStartDate);
+    previousWeekStartDate.setDate(previousWeekStartDate.getDate() - 7);
+
+    const previousWeekEndDate = new Date(currentWeekStartDate);
+    previousWeekEndDate.setDate(previousWeekEndDate.getDate() - 1);
+
+    // Format dates as strings (assuming the desired format is DD-MM-YYYY)
+    const previousWeekStartDateStr = formatDate(previousWeekStartDate);
+    const previousWeekEndDateStr = formatDate(previousWeekEndDate);
+
+    return {
+      previousWeekStartDate: previousWeekStartDateStr,
+      previousWeekEndDate: previousWeekEndDateStr,
+    };
+  }
+
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}- ${year}`;
+  }
+
+  // Example usage
+  const [currentWeekDates, setcurrentWeekDates] = useState({});
+  const [previousWeekDates, setpreviousWeekDates] = useState({});
+
   useEffect(() => {
     GetUserMetricesData(0);
     GetMetricesOverview(0);
+    setcurrentWeekDates(getCurrentWeekDates());
+    setpreviousWeekDates(getPreviousWeekDates());
   }, []);
 
   return (
@@ -125,9 +184,14 @@ function HomePage() {
                     setButtonStyle1("text-dark");
                     GetUserMetricesData(1);
                     GetMetricesOverview(1);
+                    setpreviousWeekDates(getPreviousWeekDates());
                   }}
                 >
                   <p> الأسبوع السابق</p>
+                  <p>
+                    {previousWeekDates.previousWeekStartDate} <br />
+                    {previousWeekDates.previousWeekEndDate}
+                  </p>
                 </div>
               </div>
             </div>
@@ -140,33 +204,17 @@ function HomePage() {
                     setButtonStyle2("text-dark");
                     GetUserMetricesData(0);
                     GetMetricesOverview(0);
+                    setcurrentWeekDates(getCurrentWeekDates());
                   }}
                 >
                   <p> هذا الأسبوع </p>
+                  <p>
+                    {currentWeekDates.currentWeekStartDate} <br />
+                    {currentWeekDates.currentWeekEndDate}
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="container text-center">
-            <p>
-              {data.map((i) =>
-                i.week_day === "Sunday"
-                  ? "الأحد"
-                  : i.week_day === "Monday"
-                  ? "الأثنين"
-                  : i.week_day === "Tuesday"
-                  ? "الثلاثاء"
-                  : i.week_day === "Wednesday"
-                  ? "الاربعاء"
-                  : i.week_day === "Thursday"
-                  ? "الخميس"
-                  : i.week_day === "Friday"
-                  ? "الجمعة"
-                  : "السبت"
-              )}{" "}
-              {" , "}
-            </p>
           </div>
 
           <hr />
@@ -191,7 +239,7 @@ function HomePage() {
                       </p>
                     </td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td style={{ color: "#4d4d4d" }}>
                       <p>
                         {" "}
@@ -204,8 +252,8 @@ function HomePage() {
                         <b>الطلبات المعروضة </b>{" "}
                       </p>
                     </td>
-                  </tr>
-                  <tr>
+                  </tr> */}
+                  {/* <tr>
                     <td style={{ color: "#4d4d4d" }}>
                       <p>
                         {" "}
@@ -217,7 +265,7 @@ function HomePage() {
                         <b> الطلبات المقبولة</b>
                       </p>
                     </td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <td style={{ color: "#4d4d4d" }}>
                       <p>
@@ -289,7 +337,6 @@ function HomePage() {
                 <td>
                   <p> عدد الطلبات </p>
                 </td>
-
                 <td>
                   <p> اليوم</p>
                 </td>
@@ -302,15 +349,13 @@ function HomePage() {
                 : data.map((i) => (
                     <tr>
                       <td>
-                        <p> {i.dt} </p>{" "}
+                        <p> {i.dt} </p>
                       </td>
                       <td>
-                        {" "}
                         <p>{i.total_orders} </p>
                       </td>
 
                       <td>
-                        {" "}
                         <p>
                           {i.week_day === "Sunday"
                             ? "الأحد"

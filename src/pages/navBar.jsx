@@ -98,12 +98,12 @@ function NavBar() {
               </li>
               <li className="nav-item rounded border-4 m-1">
                 <Link className={navLinkClassName} to="/compensations">
-                  <h3>المكافئات</h3>
+                  <h3>التعويضات</h3>
                 </Link>
               </li>
               <li className="nav-item rounded border-4 m-1">
                 <Link className={navLinkClassName} to="/penalties">
-                  <h3>العقوبات</h3>
+                  <h3>المخالفات</h3>
                 </Link>
               </li>
 

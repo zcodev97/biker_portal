@@ -53,10 +53,10 @@ function PenaltiesPage() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="container-fluid">
+        <div className="container">
           <NavBar />
           <div className="container text-center">
-            <h3>العقوبات</h3>
+            <h3>المخالفات</h3>
           </div>
           <div className="container text-end pt-2 pb-2 ">
             <p>
@@ -73,6 +73,7 @@ function PenaltiesPage() {
                   onClick={() => {
                     setButtonStyle2(" text-primary");
                     setButtonStyle1(" text-dark");
+                    GetUserMetricesData(1);
                   }}
                 >
                   <p> الأسبوع السابق</p>
@@ -86,6 +87,7 @@ function PenaltiesPage() {
                   onClick={() => {
                     setButtonStyle1(" text-primary");
                     setButtonStyle2(" text-dark");
+                    GetUserMetricesData(0);
                   }}
                 >
                   <p>هذا الأسبوع</p>
@@ -102,46 +104,51 @@ function PenaltiesPage() {
           </div>
           <hr />
 
-          <table
-            className="
-          table table-striped text-center"
-          >
-            <thead>
-              <tr>
-                <td> التاريخ </td>
-                <td> مقدار العقوبه </td>
-                <td> السبب</td>
-
-                <td>اليوم</td>
-              </tr>
-            </thead>
-
-            <tbody className="text-dark">
-              {data.map((i) => (
+          <div className="container">
+            <table
+              className="
+          table table-responsive table-striped text-center"
+              style={{
+                tableLayout: "fixed",
+              }}
+            >
+              <thead>
                 <tr>
-                  <td>{i.date}</td>
-                  <td>{i.amount}</td>
-                  <td>{i.reason}</td>
+                  <td> التاريخ </td>
+                  <td> مقدار المخالفة </td>
+                  <td style={{ wordWrap: "break-word" }}> السبب</td>
 
-                  <td>
-                    {i.week_day === "Sunday"
-                      ? "الأحد"
-                      : i.week_day === "Monday"
-                      ? "الأثنين"
-                      : i.week_day === "Tuesday"
-                      ? "الثلاثاء"
-                      : i.week_day === "Wednesday"
-                      ? "الاربعاء"
-                      : i.week_day === "Thursday"
-                      ? "الخميس"
-                      : i.week_day === "Friday"
-                      ? "الجمعة"
-                      : "السبت"}
-                  </td>
+                  <td>اليوم</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody className="text-dark">
+                {data.map((i) => (
+                  <tr>
+                    <td>{i.date}</td>
+                    <td>{i.amount}</td>
+                    <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
+
+                    <td>
+                      {i.week_day === "Sunday"
+                        ? "الأحد"
+                        : i.week_day === "Monday"
+                        ? "الأثنين"
+                        : i.week_day === "Tuesday"
+                        ? "الثلاثاء"
+                        : i.week_day === "Wednesday"
+                        ? "الاربعاء"
+                        : i.week_day === "Thursday"
+                        ? "الخميس"
+                        : i.week_day === "Friday"
+                        ? "الجمعة"
+                        : "السبت"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </>

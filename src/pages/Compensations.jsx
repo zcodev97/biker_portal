@@ -56,7 +56,7 @@ function CompensationsPage() {
         <div className="container-fluid">
           <NavBar />
           <div className="container text-center">
-            <h2>المكافئات</h2>
+            <h2>العويضات</h2>
           </div>
           <hr />
           <div className="container text-end pt-2 pb-2 ">
@@ -72,6 +72,7 @@ function CompensationsPage() {
                   onClick={() => {
                     setButtonStyle2(" text-primary ");
                     setButtonStyle1(" text-dark ");
+                    GetUserMetricesData(1);
                   }}
                 >
                   <p> الأسبوع السابق</p>
@@ -85,6 +86,7 @@ function CompensationsPage() {
                   onClick={() => {
                     setButtonStyle1(" text-primary ");
                     setButtonStyle2(" text-dark ");
+                    GetUserMetricesData(0);
                   }}
                 >
                   <p>هذا الأسبوع</p>
@@ -104,12 +106,15 @@ function CompensationsPage() {
 
           <table
             className="
-          table table-striped text-center"
+          table table-responsive table-striped text-center"
+            style={{
+              tableLayout: "fixed",
+            }}
           >
             <thead>
               <tr>
                 <td> التاريخ </td>
-                <td> مقدار المكافئة </td>
+                <td> مقدار التعويض </td>
                 <td> السبب</td>
 
                 <td>اليوم</td>
@@ -121,7 +126,7 @@ function CompensationsPage() {
                 <tr>
                   <td>{i.date}</td>
                   <td>{i.amount}</td>
-                  <td>{i.reason}</td>
+                  <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
 
                   <td>
                     {i.week_day === "Sunday"

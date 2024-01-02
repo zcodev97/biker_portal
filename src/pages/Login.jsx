@@ -76,11 +76,11 @@ function Login() {
             <div className="col-md-6 m-1">
               <div className="container-fluid">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control text-center"
                   style={{ backgroundColor: "#e6e6e6" }}
                   id="email"
-                  placeholder="أسم المستخدم"
+                  placeholder="رقم الهاتف"
                   name="email"
                   onChange={handleUsername}
                 />
