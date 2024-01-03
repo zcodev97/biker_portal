@@ -35,7 +35,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         if (data.detail) {
-          alert(data.detail);
+          // alert(data.detail);
           setLoggedIn(false);
           return;
         }

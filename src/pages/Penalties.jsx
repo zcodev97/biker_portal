@@ -153,7 +153,7 @@ function PenaltiesPage() {
           </div> */}
           <hr />
 
-          <div className="container">
+          <div className="container-fluid">
             <table
               className="
           table table-responsive table-striped text-center"
@@ -163,7 +163,7 @@ function PenaltiesPage() {
             >
               <thead>
                 <tr>
-                  <td> التاريخ </td>
+                  <td className="text-center"> التاريخ </td>
                   <td> مقدار المخالفة </td>
                   <td style={{ wordWrap: "break-word" }}> السبب</td>
 
@@ -171,10 +171,14 @@ function PenaltiesPage() {
                 </tr>
               </thead>
 
-              <tbody className="text-dark">
+              <tbody className="text-dark text-center">
                 {data.map((i) => (
                   <tr>
-                    <td>{i.date}</td>
+                    <td>
+                      <div className="text-center" style={{ width: "100px" }}>
+                        {i.date}
+                      </div>
+                    </td>
                     <td>{i.amount}</td>
                     <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
 
