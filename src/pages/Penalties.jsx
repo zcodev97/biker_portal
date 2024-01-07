@@ -33,7 +33,7 @@ function PenaltiesPage() {
           alert(data.detail);
           return;
         }
-        console.log(data);
+        // console.log(data);
         setData(data);
       })
       .catch((error) => {
@@ -153,54 +153,53 @@ function PenaltiesPage() {
           </div> */}
           <hr />
 
-          <div className="container-fluid">
-            <table
-              className="
-          table table-responsive table-striped text-center"
-              style={{
-                tableLayout: "fixed",
-              }}
-            >
-              <thead>
-                <tr>
-                  <td className="text-center"> التاريخ </td>
-                  <td> مقدار المخالفة </td>
-                  <td style={{ wordWrap: "break-word" }}> السبب</td>
-
-                  <td>اليوم</td>
-                </tr>
-              </thead>
-
-              <tbody className="text-dark text-center">
-                {data.map((i) => (
+          <div className="container">
+            <div className="table-responsive">
+              <table
+                className="
+          table table-md  table-striped text-center"
+              >
+                <thead>
                   <tr>
-                    <td>
-                      <div className="text-center" style={{ width: "100px" }}>
-                        {i.date}
-                      </div>
-                    </td>
-                    <td>{i.amount}</td>
-                    <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
+                    <td> التاريخ </td>
+                    <td> مقدار المخالفة </td>
+                    <td style={{ wordWrap: "break-word" }}> السبب</td>
 
-                    <td>
-                      {i.week_day === "Sunday"
-                        ? "الأحد"
-                        : i.week_day === "Monday"
-                        ? "الأثنين"
-                        : i.week_day === "Tuesday"
-                        ? "الثلاثاء"
-                        : i.week_day === "Wednesday"
-                        ? "الاربعاء"
-                        : i.week_day === "Thursday"
-                        ? "الخميس"
-                        : i.week_day === "Friday"
-                        ? "الجمعة"
-                        : "السبت"}
-                    </td>
+                    <td>اليوم</td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody className="text-dark text-center">
+                  {data.map((i) => (
+                    <tr>
+                      <td>
+                        <div className="text-center" style={{ width: "100px" }}>
+                          {i.date}
+                        </div>
+                      </td>
+                      <td>{i.amount}</td>
+                      <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
+
+                      <td>
+                        {i.week_day === "Sunday"
+                          ? "الأحد"
+                          : i.week_day === "Monday"
+                          ? "الأثنين"
+                          : i.week_day === "Tuesday"
+                          ? "الثلاثاء"
+                          : i.week_day === "Wednesday"
+                          ? "الاربعاء"
+                          : i.week_day === "Thursday"
+                          ? "الخميس"
+                          : i.week_day === "Friday"
+                          ? "الجمعة"
+                          : "السبت"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}

@@ -97,7 +97,7 @@ function CompensationsPage() {
         <div className="container-fluid">
           <NavBar />
           <div className="container text-center">
-            <h2>العويضات</h2>
+            <h2>التعويضات</h2>
           </div>
           <hr />
           <div className="container text-end pt-2 pb-2 ">
@@ -155,9 +155,10 @@ function CompensationsPage() {
 
           <table
             className="
-          table table-responsive table-striped text-center"
+          table table-responsive table-striped table-bordered text-center"
             style={{
-              tableLayout: "fixed",
+              tableLayout: "auto",
+              maxWidth: "200px",
             }}
           >
             <thead>
