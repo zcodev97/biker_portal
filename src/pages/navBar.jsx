@@ -66,7 +66,7 @@ function NavBar() {
 
             <li className="nav-item rounded text flex-grow-1 m-0">
               <Link className={normalStyle} to="/payments">
-                <p>💲</p>
+                <p>💵</p>
                 <b className="text-dark"> الدفعات</b>
               </Link>
             </li>

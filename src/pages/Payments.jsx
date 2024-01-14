@@ -177,7 +177,7 @@ function PaymentsPage() {
                     }
                   )}
                 </td>
-                <td> المبلغ الكلي</td>
+                <td> مجموع المبلغ الاولي للطلبات</td>
               </tr>
               <tr>
                 <td>
@@ -191,7 +191,7 @@ function PaymentsPage() {
                     }
                   )}
                 </td>
-                <td> المسابقة الاسبوعية ان وجدت</td>
+                <td> المسابقة الاسبوعية </td>
               </tr>
               <tr>
                 <td>
@@ -205,7 +205,7 @@ function PaymentsPage() {
                     }
                   )}
                 </td>
-                <td> حافز الساعة</td>
+                <td> المسابقات اليومية ان وجدت</td>
               </tr>
               <tr>
                 <td>
