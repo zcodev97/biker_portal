@@ -94,7 +94,10 @@ function PenaltiesPage() {
       {loading ? (
         <Loading />
       ) : (
-        <div className="container">
+        <div
+          className="container-fluid"
+          style={{ width: window.innerWidth, marginLeft: "-12px" }}
+        >
           <NavBar />
           <div className="container pt-4 text-center">
             <h2>المخالفات</h2>
@@ -169,7 +172,7 @@ function PenaltiesPage() {
                 {data.map((i) => (
                   <tr>
                     <td>
-                      <div className="text-center" style={{ width: "100px" }}>
+                      <div className="text-center" style={{ width: "80px" }}>
                         {i.date}
                       </div>
                     </td>

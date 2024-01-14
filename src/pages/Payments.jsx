@@ -123,7 +123,7 @@ function PaymentsPage() {
       ) : (
         <div
           className="container-fluid pt-2"
-          style={{ maxHeight: "calc(100vh - 300px)", overflowY: "auto" }}
+          style={{ maxHeight: "calc(100vh - 400px)", overflowY: "auto" }}
         >
           <table
             className="
