@@ -96,15 +96,16 @@ function CompensationsPage() {
       ) : (
         <div className="container-fluid">
           <NavBar />
-          <div className="container text-center">
+          <div className="container pt-4 text-center">
             <h2>التعويضات</h2>
           </div>
-          <hr />
+
           <div className="container text-end pt-2 pb-2 ">
             <p style={{ color: "#666666" }}>
               <b>{localStorage.getItem("biker_name") + " "}</b>👤
             </p>
           </div>
+          <hr />
           <div className="row p-0 m-0">
             <div className="col-6 text-right m-0 ">
               <div className="next">
@@ -144,59 +145,60 @@ function CompensationsPage() {
             </div>
           </div>
 
-          <div className="container text-center">
-            {data.length === 0 ? "" : data[0] && data[0].date + "  👉  "}
-            {data.length === 0
-              ? ""
-              : data[data.length - 1] && data[data.length - 1].date}
-          </div>
-
           <hr />
 
-          <table
-            className="
-          table table-responsive table-striped table-bordered text-center"
-            style={{
-              tableLayout: "auto",
-              maxWidth: "200px",
-            }}
+          <div
+            className="container"
+            style={{ maxHeight: "calc(100vh - 400px)", overflowY: "auto" }}
           >
-            <thead>
-              <tr>
-                <td> التاريخ </td>
-                <td> مقدار التعويض </td>
-                <td> السبب</td>
-
-                <td>اليوم</td>
-              </tr>
-            </thead>
-
-            <tbody className="text-dark">
-              {data.map((i) => (
+            <table
+              className="
+            table table-md  table-striped text-center"
+            >
+              <thead>
                 <tr>
-                  <td>{i.date}</td>
-                  <td>{i.amount}</td>
-                  <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
+                  <td> التاريخ </td>
+                  <td> مقدار التعويض </td>
+                  <td> السبب</td>
 
-                  <td>
-                    {i.week_day === "Sunday"
-                      ? "الأحد"
-                      : i.week_day === "Monday"
-                      ? "الأثنين"
-                      : i.week_day === "Tuesday"
-                      ? "الثلاثاء"
-                      : i.week_day === "Wednesday"
-                      ? "الاربعاء"
-                      : i.week_day === "Thursday"
-                      ? "الخميس"
-                      : i.week_day === "Friday"
-                      ? "الجمعة"
-                      : "السبت"}
-                  </td>
+                  <td>اليوم</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody className="text-dark">
+                {data.map((i) => (
+                  <tr>
+                    <td>{i.date}</td>
+                    <td>
+                      {i.amount.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "IQD",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2,
+                      })}
+                    </td>
+                    <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
+
+                    <td>
+                      {i.week_day === "Sunday"
+                        ? "الأحد"
+                        : i.week_day === "Monday"
+                        ? "الأثنين"
+                        : i.week_day === "Tuesday"
+                        ? "الثلاثاء"
+                        : i.week_day === "Wednesday"
+                        ? "الاربعاء"
+                        : i.week_day === "Thursday"
+                        ? "الخميس"
+                        : i.week_day === "Friday"
+                        ? "الجمعة"
+                        : "السبت"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </>

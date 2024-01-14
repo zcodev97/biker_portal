@@ -1,19 +1,21 @@
-import { useEffect } from "react";
 import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
-import Loading from "./loading";
 import { useNavigate } from "react-router-dom";
-import { Biker_System_URL } from "../global";
 
 // db password Qymbg5QhNbAzRn!
 
 function NavBar() {
   const navigate = useNavigate();
 
-  let navLinkClassName = "nav-link text-dark rounded ";
+  const [normalStyle, setnormalStyle] = useState(
+    "nav-link text-dark text-center bg-light m-0 border-end border-2"
+  );
+
+  const [selectedButton, setSelectedButton] = useState(
+    "nav-link text-light  text-center bg-primary rounded border rounded"
+  );
 
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState();
 
   async function handleLogout() {
     setLoading(true);
@@ -26,99 +28,59 @@ function NavBar() {
     navigate("/login", { replace: true });
   }
 
-  //get saved token and send it to backend to check its permissions
-  async function checkUserPermissions() {
-    setLoading(true);
-    var token = localStorage.getItem("token");
-
-    await fetch(Biker_System_URL + "auth/user-info", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-        setData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        alert(error);
-      });
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    checkUserPermissions();
-  }, []);
-
-  if (loading) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  }
-
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-dark rounded ">
-        <div className="container-fluid  d-flex justify-content-between">
-          {/* Start of the main navbar content */}
+      <div className="container-fluid"></div>
+      <nav
+        className="navbar navbar-expand-sm navbar-dark fixed-bottom"
+        style={{
+          marginTop: "50px",
+          marginBottom: "-10px",
+          marginLeft: "-12px",
+          marginRight: "-15px",
+        }}
+      >
+        <div className="container-fluid d-flex justify-content-around">
+          {/* Start of the navbar links */}
+          <ul className="navbar-nav d-flex flex-row w-100">
+            <li className="nav-item flex-grow-1 text-center m-0">
+              <Link className={normalStyle} to="/home">
+                <p>🏠</p>
+                <b className="text-dark">الرئيسية</b>
+              </Link>
+            </li>
 
-          <Link className="nav-link text-primary" to="/home">
-            <h3>
-              <b>بلي</b>
-            </h3>
-          </Link>
+            <li className="nav-item rounded flex-grow-1 m-0">
+              <Link className={normalStyle} to="/compensations">
+                <p>➕💵</p>
+                <b className="text-success"> التعويضات</b>
+              </Link>
+            </li>
 
-          <button
-            className="navbar-toggler bg-primary"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+            <li className="nav-item rounded text flex-grow-1 m-0">
+              <Link className={normalStyle} to="/penalties">
+                <p>➖💵</p>
+                <b className="text-danger"> المخالفات</b>
+              </Link>
+            </li>
 
-          {/* End of the main navbar content */}
+            <li className="nav-item rounded text flex-grow-1 m-0">
+              <Link className={normalStyle} to="/payments">
+                <p>💲</p>
+                <b className="text-dark"> الدفعات</b>
+              </Link>
+            </li>
 
-          {/* Start of the mobile menu */}
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav text-center">
-              <li className="nav-item rounded m-1">
-                <Link className={navLinkClassName} to="/home">
-                  <h3>الصفحة الرئيسية</h3>
-                </Link>
-              </li>
-              <li className="nav-item rounded border-4 m-1">
-                <Link className={navLinkClassName} to="/compensations">
-                  <h3>التعويضات</h3>
-                </Link>
-              </li>
-              <li className="nav-item rounded border-4 m-1">
-                <Link className={navLinkClassName} to="/penalties">
-                  <h3>المخالفات</h3>
-                </Link>
-              </li>
-
-              <li className="nav-item rounded m-1">
-                <Link
-                  className="nav-link  text-center rounded p-2 border  border-danger"
-                  to="/login"
-                  onClick={handleLogout}
-                >
-                  <h1>📤</h1>
-                </Link>
-              </li>
-            </ul>
-          </div>
-          {/* End of the mobile menu */}
+            {/* Logout button */}
+            <li className="nav-item rounded flex-grow-1 m-0">
+              <Link className={normalStyle} to="/login" onClick={handleLogout}>
+                <p>📤</p>
+                <b>خروج</b>
+              </Link>
+            </li>
+            {/* End of the logout button */}
+          </ul>
+          {/* End of the navbar links */}
         </div>
       </nav>
 

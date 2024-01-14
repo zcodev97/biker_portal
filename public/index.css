@@ -20,3 +20,21 @@
     cursor: pointer;
     color: white !important;
 } */
+
+.table thead {
+  position: sticky !important;
+  top: 0 !important;
+  background-color: #1566b8 !important; /* Customize the background color as needed */
+  z-index: 1 !important;
+}
+
+
+#loginPage
+{
+  background: linear-gradient(to bottom, #0000FF, #54BCBD)
+
+}
+
+#loginButton{
+  background: linear-gradient(to bottom, #0000FF, #54BCBD)
+}

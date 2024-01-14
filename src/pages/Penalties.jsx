@@ -96,8 +96,8 @@ function PenaltiesPage() {
       ) : (
         <div className="container">
           <NavBar />
-          <div className="container text-center">
-            <h3>المخالفات</h3>
+          <div className="container pt-4 text-center">
+            <h2>المخالفات</h2>
           </div>
           <div className="container text-end pt-2 pb-2 ">
             <p>
@@ -145,61 +145,63 @@ function PenaltiesPage() {
             </div>
           </div>
 
-          {/* <div className="container text-center">
-            {data.length === 0 ? "" : data[0] && data[0].date + "  👉  "}
-            {data.length === 0
-              ? ""
-              : data[data.length - 1] && data[data.length - 1].date}
-          </div> */}
           <hr />
 
-          <div className="container">
-            <div className="table-responsive">
-              <table
-                className="
+          <div
+            className="container"
+            style={{ maxHeight: "calc(100vh - 400px)", overflowY: "auto" }}
+          >
+            <table
+              className="
           table table-md  table-striped text-center"
-              >
-                <thead>
+            >
+              <thead>
+                <tr>
+                  <td> التاريخ </td>
+                  <td> مقدار المخالفة </td>
+                  <td style={{ wordWrap: "break-word" }}> السبب</td>
+
+                  <td>اليوم</td>
+                </tr>
+              </thead>
+
+              <tbody className="text-dark text-center">
+                {data.map((i) => (
                   <tr>
-                    <td> التاريخ </td>
-                    <td> مقدار المخالفة </td>
-                    <td style={{ wordWrap: "break-word" }}> السبب</td>
+                    <td>
+                      <div className="text-center" style={{ width: "100px" }}>
+                        {i.date}
+                      </div>
+                    </td>
+                    <td>
+                      {i.amount.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "IQD",
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 2,
+                      })}
+                    </td>
+                    <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
 
-                    <td>اليوم</td>
+                    <td>
+                      {i.week_day === "Sunday"
+                        ? "الأحد"
+                        : i.week_day === "Monday"
+                        ? "الأثنين"
+                        : i.week_day === "Tuesday"
+                        ? "الثلاثاء"
+                        : i.week_day === "Wednesday"
+                        ? "الاربعاء"
+                        : i.week_day === "Thursday"
+                        ? "الخميس"
+                        : i.week_day === "Friday"
+                        ? "الجمعة"
+                        : "السبت"}
+                    </td>
                   </tr>
-                </thead>
-
-                <tbody className="text-dark text-center">
-                  {data.map((i) => (
-                    <tr>
-                      <td>
-                        <div className="text-center" style={{ width: "100px" }}>
-                          {i.date}
-                        </div>
-                      </td>
-                      <td>{i.amount}</td>
-                      <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
-
-                      <td>
-                        {i.week_day === "Sunday"
-                          ? "الأحد"
-                          : i.week_day === "Monday"
-                          ? "الأثنين"
-                          : i.week_day === "Tuesday"
-                          ? "الثلاثاء"
-                          : i.week_day === "Wednesday"
-                          ? "الاربعاء"
-                          : i.week_day === "Thursday"
-                          ? "الخميس"
-                          : i.week_day === "Friday"
-                          ? "الجمعة"
-                          : "السبت"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       )}

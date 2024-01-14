@@ -7,10 +7,12 @@ import Login from "./pages/Login";
 import NoPage from "./pages/NoPage";
 import CompensationsPage from "./pages/Compensations";
 import PenaltiesPage from "./pages/Penalties";
+import PaymentsPage from "./pages/Payments";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isConnected, setIsConnected] = useState(true);
 
   async function getSavedUserInLocalStorage() {
     setLoading(true);
@@ -35,7 +37,6 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         if (data.detail) {
-          // alert(data.detail);
           setLoggedIn(false);
           return;
         }
@@ -50,29 +51,45 @@ function App() {
   }
 
   useEffect(() => {
-    getSavedUserInLocalStorage();
+    window.addEventListener("online", function () {
+      setIsConnected(true);
+      getSavedUserInLocalStorage();
+    });
+
+    window.addEventListener("offline", function () {
+      setIsConnected(false);
+    });
   }, []);
 
   return (
-    <div className="container-fluid" style={{ height: "100vh" }}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              loading ? <Loading /> : loggedIn ? <HomePage /> : <Login />
-            }
-          />
+    <>
+      {isConnected ? (
+        <div className="container-fluid" style={{ height: "100vh" }}>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  loading ? <Loading /> : loggedIn ? <HomePage /> : <Login />
+                }
+              />
 
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/compensations" element={<CompensationsPage />} />
-          <Route path="/penalties" element={<PenaltiesPage />} />
-          <Route path="/login" element={<Login />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/compensations" element={<CompensationsPage />} />
+              <Route path="/penalties" element={<PenaltiesPage />} />
+              <Route path="/payments" element={<PaymentsPage />} />
+              <Route path="/login" element={<Login />} />
 
-          <Route path="*" element={<NoPage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+              <Route path="*" element={<NoPage />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      ) : (
+        <div className="container text-center bg-dark text-danger pt-4 mt-4">
+          <h2 className="pt-4 m-4">Not Internet 😟</h2>
+        </div>
+      )}
+    </>
   );
 }
 

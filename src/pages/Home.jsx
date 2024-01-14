@@ -40,8 +40,6 @@ function HomePage() {
           return;
         }
 
-        console.log(data);
-
         let tempTotalWeekOrders = 0;
         for (const day in data) {
           if (data.hasOwnProperty(day)) {
@@ -52,7 +50,6 @@ function HomePage() {
             }
           }
         }
-        console.log(data);
 
         setData(data);
       })
@@ -151,7 +148,7 @@ function HomePage() {
         <div className="container-fluid m-0 p-0">
           <NavBar />
 
-          <div className="container-fluid text-center">
+          <div className="container-fluid pt-4 text-center">
             <h4>الصفحة الرئيسية</h4>
           </div>
           <hr />
@@ -195,7 +192,8 @@ function HomePage() {
                 >
                   <p> هذا الأسبوع </p>
                   <p>
-                    {formatDate(currentWeekDates.startDate)} <br />
+                    {formatDate(currentWeekDates.startDate)}
+                    <br />
                     {formatDate(currentWeekDates.endDate)}
                   </p>
                 </div>
@@ -214,154 +212,88 @@ function HomePage() {
                   <tr>
                     <td style={{ color: "#4d4d4d" }}>
                       <p>
-                        {" "}
-                        <b> {overViewData.delivered_orders} </b>
+                        <b>{overViewData.delivered_orders}</b>
                       </p>
                     </td>
                     <td className="text-end" style={{ color: "#4d4d4d" }}>
                       <p>
-                        {" "}
-                        <b> الطلبات الواصلة </b>{" "}
+                        <b> الطلبات الواصلة </b>
                       </p>
                     </td>
                   </tr>
-                  {/* <tr>
-                    <td style={{ color: "#4d4d4d" }}>
-                      <p>
-                        {" "}
-                        <b> {overViewData.offered_orders} </b>
-                      </p>
-                    </td>
-                    <td className="text-end" style={{ color: "#4d4d4d" }}>
-                      <p>
-                        {" "}
-                        <b>الطلبات المعروضة </b>{" "}
-                      </p>
-                    </td>
-                  </tr> */}
-                  {/* <tr>
-                    <td style={{ color: "#4d4d4d" }}>
-                      <p>
-                        {" "}
-                        <b>{overViewData.accepted_orders} </b>{" "}
-                      </p>
-                    </td>
-                    <td className="text-end" style={{ color: "#4d4d4d" }}>
-                      <p>
-                        <b> الطلبات المقبولة</b>
-                      </p>
-                    </td>
-                  </tr> */}
+
                   <tr>
                     <td style={{ color: "#4d4d4d" }}>
                       <p>
-                        {" "}
-                        <b>
-                          {" "}
-                          {parseFloat(overViewData.dt_avg).toFixed(2)}{" "}
-                        </b>{" "}
+                        <b>{parseFloat(overViewData.dt_avg).toFixed(2)}</b>
                       </p>
                     </td>
                     <td className="text-end" style={{ color: "#4d4d4d" }}>
                       <p>
-                        {" "}
-                        <b> معدل وقت التوصيل </b>{" "}
+                        <b> معدل وقت التوصيل </b>
                       </p>
                     </td>
                   </tr>
-                  {/* <tr>
-                    <td>
-                      <p className="text-danger">
-                        {"- " + overViewData.penalty_amount.toLocaleString()}
-                      </p>
-                    </td>
-                    <td>
-                      <p className="text-danger"> العقوبات </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p> {overViewData.penalties} </p>
-                    </td>
-                    <td>
-                      <p> عدد العقوبات </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p className="text-success">
-                        {"+ " +
-                          overViewData.compensation_amount.toLocaleString()}
-                      </p>
-                    </td>
-                    <td>
-                      <p className="text-success"> التعويضات </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p> {overViewData.compensations} </p>{" "}
-                    </td>
-                    <td>
-                      <p> عدد التعويضات </p>{" "}
-                    </td>
-                  </tr> */}
                 </tbody>
               </table>
             )}
           </div>
 
-          <table
-            className="
-          table table-striped text-center"
+          <div
+            className="container"
+            style={{ maxHeight: "calc(100vh - 500px)", overflowY: "auto" }}
           >
-            <thead>
-              <tr>
-                <td>
-                  <p> وقت التوصيل </p>
-                </td>
-                <td>
-                  <p> عدد الطلبات </p>
-                </td>
-                <td>
-                  <p> اليوم</p>
-                </td>
-              </tr>
-            </thead>
+            <table
+              className="
+          table table-sm table-striped"
+            >
+              <thead className="text-center">
+                <tr>
+                  <td>
+                    <b> وقت التوصيل </b>
+                  </td>
+                  <td>
+                    <b> عدد الطلبات </b>
+                  </td>
+                  <td>
+                    <b> اليوم</b>
+                  </td>
+                </tr>
+              </thead>
+              <tbody className="text-center">
+                {data.length === 0
+                  ? ""
+                  : data.map((i) => (
+                      <tr>
+                        <td>
+                          <p>{i.dt}</p>
+                        </td>
+                        <td>
+                          <p>{i.total_orders}</p>
+                        </td>
 
-            <tbody className="text-dark">
-              {data.length === 0
-                ? ""
-                : data.map((i) => (
-                    <tr>
-                      <td>
-                        <p> {i.dt} </p>
-                      </td>
-                      <td>
-                        <p>{i.total_orders} </p>
-                      </td>
-
-                      <td>
-                        <p>
-                          {i.week_day === "Sunday"
-                            ? "الأحد"
-                            : i.week_day === "Monday"
-                            ? "الأثنين"
-                            : i.week_day === "Tuesday"
-                            ? "الثلاثاء"
-                            : i.week_day === "Wednesday"
-                            ? "الاربعاء"
-                            : i.week_day === "Thursday"
-                            ? "الخميس"
-                            : i.week_day === "Friday"
-                            ? "الجمعة"
-                            : "السبت"}{" "}
-                        </p>
-                      </td>
-                    </tr>
-                  ))}
-            </tbody>
-          </table>
+                        <td>
+                          <p>
+                            {i.week_day === "Sunday"
+                              ? "الأحد"
+                              : i.week_day === "Monday"
+                              ? "الأثنين"
+                              : i.week_day === "Tuesday"
+                              ? "الثلاثاء"
+                              : i.week_day === "Wednesday"
+                              ? "الاربعاء"
+                              : i.week_day === "Thursday"
+                              ? "الخميس"
+                              : i.week_day === "Friday"
+                              ? "الجمعة"
+                              : "السبت"}
+                          </p>
+                        </td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </>
