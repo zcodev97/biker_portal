@@ -81,7 +81,6 @@ function HomePage() {
         }
         if (data.detail) {
           alert(data.detail);
-
           return;
         }
 
@@ -148,7 +147,7 @@ function HomePage() {
         <div className="container-fluid m-0 p-0">
           <NavBar />
 
-          <div className="container-fluid pt-4 text-center">
+          <div className="container-fluid  text-center">
             <h4>الصفحة الرئيسية</h4>
           </div>
           <hr />
@@ -217,7 +216,31 @@ function HomePage() {
                     </td>
                     <td className="text-end" style={{ color: "#4d4d4d" }}>
                       <p>
-                        <b> الطلبات الواصلة </b>
+                        <b> عدد الطلبات الكلي </b>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b>{overViewData.single_orders}</b>
+                      </p>
+                    </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b> الطلبات المفردة </b>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b>{overViewData.batch_orders}</b>
+                      </p>
+                    </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b> الطلبات المزدوجة </b>
                       </p>
                     </td>
                   </tr>
@@ -234,26 +257,47 @@ function HomePage() {
                       </p>
                     </td>
                   </tr>
+                  <tr>
+                    <td style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b>
+                          {parseFloat(overViewData.extra_distance).toFixed(2)}
+                        </b>
+                      </p>
+                    </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b> المسافات الطويلة </b>
+                      </p>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             )}
           </div>
 
-          <div
-            className="container"
-            style={{ maxHeight: "calc(100vh - 500px)", overflowY: "auto" }}
-          >
+          <div className="container-fluid" style={{ overflowY: "auto" }}>
             <table
               className="
           table table-sm table-striped"
+              style={{ marginBottom: "50vh" }}
             >
               <thead className="text-center">
                 <tr>
                   <td>
+                    <b> المسافات الطويلة </b>
+                  </td>
+                  <td>
                     <b> وقت التوصيل </b>
                   </td>
                   <td>
-                    <b> عدد الطلبات </b>
+                    <b> الطلبات المفردة </b>
+                  </td>
+                  <td>
+                    <b> الطلبات المزدوجة </b>
+                  </td>
+                  <td>
+                    <b> عدد الطلبات الكلي</b>
                   </td>
                   <td>
                     <b> اليوم</b>
@@ -266,7 +310,16 @@ function HomePage() {
                   : data.map((i) => (
                       <tr>
                         <td>
+                          <p>{parseFloat(i.extra_distance).toFixed(2)}</p>
+                        </td>
+                        <td>
                           <p>{i.dt}</p>
+                        </td>
+                        <td style={{ color: "#4d4d4d" }}>
+                          <b>{i.single_orders}</b>
+                        </td>
+                        <td style={{ color: "#4d4d4d" }}>
+                          <p>{i.batch_orders}</p>
                         </td>
                         <td>
                           <p>{i.total_orders}</p>

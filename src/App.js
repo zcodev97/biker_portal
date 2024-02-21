@@ -65,6 +65,7 @@ function App() {
     <>
       {isConnected ? (
         <div className="container-fluid" style={{ height: "100vh" }}>
+          <p className="text-center pt-2">يتم تحديث البيانات كل نصف ساعة</p>
           <BrowserRouter>
             <Routes>
               <Route
@@ -86,7 +87,7 @@ function App() {
         </div>
       ) : (
         <div className="container text-center bg-dark text-danger pt-4 mt-4">
-          <h2 className="pt-4 m-4">Not Internet 😟</h2>
+          <h2 className="pt-4 m-4">لا يوجد اتصال انترنت 😟</h2>
         </div>
       )}
     </>

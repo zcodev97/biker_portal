@@ -151,14 +151,10 @@ function CompensationsPage() {
           <hr />
 
           <div
-            className="container-fluid"
-            style={{
-              maxHeight: "calc(100vh - 400px)",
-              maxWidth: "500px",
-              overflowY: "auto",
-            }}
+            className="container"
+            style={{ maxHeight: "calc(100vh - 400px)", overflowY: "auto" }}
           >
-            <table className="table-responsive">
+            <table className="table">
               <table className="table table-sm  table-striped text-center">
                 <thead>
                   <tr>
@@ -175,12 +171,21 @@ function CompensationsPage() {
                     <tr>
                       <td style={{ width: "100px" }}>{i.date}</td>
                       <td>
-                        {i.amount.toLocaleString("en-US", {
-                          style: "currency",
-                          currency: "IQD",
-                          minimumFractionDigits: 0,
-                          maximumFractionDigits: 2,
-                        })}
+                        <div className="container" style={{ display: "flex" }}>
+                          <pre
+                            style={{
+                              fontFamily: "sans-serif",
+                            }}
+                          >
+                            د.ع{" "}
+                          </pre>
+                          <p>
+                            {i.amount.toLocaleString("en-US", {
+                              minimumFractionDigits: 0,
+                              maximumFractionDigits: 2,
+                            })}
+                          </p>
+                        </div>
                       </td>
                       <td style={{ wordWrap: "break-word" }}> {i.reason}</td>
 

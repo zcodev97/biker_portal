@@ -139,152 +139,255 @@ function PaymentsPage() {
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].earnings_single_orders.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].earnings_single_orders.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
+
                 <td> مبلغ الطلبات المفردة</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].earnings_batch_orders.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].earnings_batch_orders.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> مبلغ الطلبات المزدوجة</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].gross_earnings.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].gross_earnings.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> مجموع المبلغ الاولي للطلبات</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].weekly_incentive.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].weekly_incentive.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> المسابقة الاسبوعية </td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].hourly_incentive.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].hourly_incentive.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> المسابقات اليومية ان وجدت</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].total_value_penalties.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].total_value_penalties.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> مجموع مبلغ الخصومات</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].compensations.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].compensations.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> مجموع مبلغ التعويضات</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].procurement_deductions.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].procurement_deductions.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> مجموع الاستقطاعات</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].net_salary.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "IQD",
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 2,
-                  })}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].net_salary.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> الراتب النهائي</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].salary_app_wallet.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].salary_app_wallet.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> المبلغ على محفظة التطبيق</td>
               </tr>
               <tr>
                 <td>
-                  {selectedDateRangeInfo[0].salary_zain_cash.toLocaleString(
-                    "en-US",
-                    {
-                      style: "currency",
-                      currency: "IQD",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].salary_zain_cash.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
                 </td>
                 <td> المبلغ على الزين كاش</td>
               </tr>
