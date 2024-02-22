@@ -1,20 +1,17 @@
 const Biker_System_URL = "https://portal.foodbi.giize.com/api/";
 
-async function LoginAPI() {
-  var token = localStorage.getItem("token");
+const SortDays = (data) => {
+  const dayOrder = {
+    Sunday: 0,
+    Monday: 1,
+    Tuesday: 2,
+    Wednesday: 3,
+    Thursday: 4,
+    Friday: 5,
+    Saturday: 6,
+  };
 
-  await fetch(Biker_System_URL + "auth", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => response.status)
-    .catch((error) => {
-      alert(error);
-      return null;
-    });
-}
+  return data.sort((a, b) => dayOrder[a.week_day] - dayOrder[b.week_day]);
+};
 
-export { Biker_System_URL };
+export { Biker_System_URL, SortDays };

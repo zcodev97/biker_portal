@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "./loading";
-import { Biker_System_URL } from "../global";
+import { Biker_System_URL, SortDays } from "../global";
 import NavBar from "./navBar";
 
 function PenaltiesPage() {
@@ -33,8 +33,9 @@ function PenaltiesPage() {
           alert(data.detail);
           return;
         }
-        // console.log(data);
-        setData(data);
+        const sortedData = SortDays(data);
+
+        setData(sortedData);
       })
       .catch((error) => {
         alert(error);

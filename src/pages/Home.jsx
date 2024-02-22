@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loading from "./loading";
-import { Biker_System_URL } from "../global";
+import { Biker_System_URL, SortDays } from "../global";
 import NavBar from "./navBar";
 
 // text-wrap for table
@@ -51,7 +51,9 @@ function HomePage() {
           }
         }
 
-        setData(data);
+        const sortedData = SortDays(data);
+
+        setData(sortedData);
       })
       .catch((error) => {
         alert(error);
