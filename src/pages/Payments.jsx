@@ -134,6 +134,31 @@ function PaymentsPage() {
               style={{ fontSize: "20px", fontWeight: "normal" }}
             >
               <tr>
+                <td className="text-center">
+                  <div className="container " style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
+                      {selectedDateRangeInfo[0].net_salary.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
+                </td>
+                <td> الراتب النهائي</td>
+              </tr>
+
+              <hr />
+              <tr>
                 <td>{selectedDateRangeInfo[0].tier}</td>
                 <td> الفئة</td>
               </tr>
