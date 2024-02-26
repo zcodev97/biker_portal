@@ -335,6 +335,29 @@ function PaymentsPage() {
                       د.ع{" "}
                     </pre>
                     <p>
+                      {selectedDateRangeInfo[0].distance_compensations.toLocaleString(
+                        "en-US",
+                        {
+                          minimumFractionDigits: 0,
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </p>
+                  </div>
+                </td>
+                <td> الاجور الاضافية للمسافة المقطوعة </td>
+              </tr>
+              <tr>
+                <td>
+                  <div className="container" style={{ display: "flex" }}>
+                    <pre
+                      style={{
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      د.ع{" "}
+                    </pre>
+                    <p>
                       {selectedDateRangeInfo[0].procurement_deductions.toLocaleString(
                         "en-US",
                         {
