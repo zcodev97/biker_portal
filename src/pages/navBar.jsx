@@ -19,11 +19,8 @@ function NavBar() {
 
   async function handleLogout() {
     setLoading(true);
-    localStorage.removeItem("token");
-    localStorage.removeItem("token_exp_date");
-    localStorage.removeItem("biker_id");
-    localStorage.removeItem("biker_name");
-    localStorage.removeItem("username");
+    localStorage.clear();
+
     setLoading(false);
     navigate("/login", { replace: true });
   }

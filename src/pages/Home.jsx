@@ -143,11 +143,12 @@ function HomePage() {
 
   return (
     <>
+      <NavBar />
       {loading ? (
         <Loading />
       ) : (
         <div className="container-fluid m-0 p-0">
-          <NavBar />
+
 
           <div className="container-fluid  text-center">
             <h4>الصفحة الرئيسية</h4>
@@ -259,7 +260,40 @@ function HomePage() {
                       </p>
                     </td>
                   </tr>
+
                   <tr>
+                    <td style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b>
+                          {` كم  ${parseFloat(
+                            overViewData.extra_48_distance
+                          ).toFixed(2)}`}
+                        </b>
+                      </p>
+                    </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b>  المسافات الاضافية بين ال4 و 8 كيلو   </b>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b>
+                          {` كم  ${parseFloat(
+                            overViewData.extra_8_distance
+                          ).toFixed(2)}`}
+                        </b>
+                      </p>
+                    </td>
+                    <td className="text-end" style={{ color: "#4d4d4d" }}>
+                      <p>
+                        <b>    المسافات الاضافية فوق ال8 كيلو </b>
+                      </p>
+                    </td>
+                  </tr>
+                  {/* <tr>
                     <td style={{ color: "#4d4d4d" }}>
                       <p>
                         <b>
@@ -274,7 +308,7 @@ function HomePage() {
                         <b> المسافات الاضافية </b>
                       </p>
                     </td>
-                  </tr>
+                  </tr> */}
                 </tbody>
               </table>
             )}
@@ -288,9 +322,18 @@ function HomePage() {
             >
               <thead className="text-center">
                 <tr>
+
                   <td>
-                    <b> المسافات الاضافية</b>
+                    <b>    المسافات الاضافية فوق ال8 كيلو </b>
                   </td>
+                  <td  >
+
+                    <b>  المسافات الاضافية بين ال4 و 8 كيلو</b>
+
+                  </td>
+                  {/* <td>
+                    <b> المسافات الاضافية</b>
+                  </td> */}
                   <td>
                     <b> وقت الوصول للمطعم + وقت الوصول للزبون</b>
                   </td>
@@ -313,43 +356,49 @@ function HomePage() {
                 {data.length === 0
                   ? ""
                   : data.map((i) => (
-                      <tr>
-                        <td>
-                          <p>{parseFloat(i.extra_distance).toFixed(2)}</p>
-                        </td>
-                        <td>
-                          <p>{i.dt}</p>
-                        </td>
+                    <tr>
+                      {/* <td>
+                        <p>{parseFloat(i.extra_distance).toFixed(2)}</p>
+                      </td> */}
+                      <td>
+                        <p>{parseFloat(i.extra_8_distance).toFixed(2)}</p>
+                      </td>
+                      <td>
+                        <p>{parseFloat(i.extra_48_distance).toFixed(2)}</p>
+                      </td>
+                      <td>
+                        <p>{i.dt}</p>
+                      </td>
 
-                        <td style={{ color: "#4d4d4d" }}>
-                          <p>{i.batch_orders}</p>
-                        </td>
-                        <td style={{ color: "#4d4d4d" }}>
-                          <b>{i.single_orders}</b>
-                        </td>
-                        <td>
-                          <p>{i.total_orders}</p>
-                        </td>
+                      <td style={{ color: "#4d4d4d" }}>
+                        <p>{i.batch_orders}</p>
+                      </td>
+                      <td style={{ color: "#4d4d4d" }}>
+                        <b>{i.single_orders}</b>
+                      </td>
+                      <td>
+                        <p>{i.total_orders}</p>
+                      </td>
 
-                        <td>
-                          <p>
-                            {i.week_day === "Sunday"
-                              ? "الأحد"
-                              : i.week_day === "Monday"
+                      <td>
+                        <p>
+                          {i.week_day === "Sunday"
+                            ? "الأحد"
+                            : i.week_day === "Monday"
                               ? "الأثنين"
                               : i.week_day === "Tuesday"
-                              ? "الثلاثاء"
-                              : i.week_day === "Wednesday"
-                              ? "الاربعاء"
-                              : i.week_day === "Thursday"
-                              ? "الخميس"
-                              : i.week_day === "Friday"
-                              ? "الجمعة"
-                              : "السبت"}
-                          </p>
-                        </td>
-                      </tr>
-                    ))}
+                                ? "الثلاثاء"
+                                : i.week_day === "Wednesday"
+                                  ? "الاربعاء"
+                                  : i.week_day === "Thursday"
+                                    ? "الخميس"
+                                    : i.week_day === "Friday"
+                                      ? "الجمعة"
+                                      : "السبت"}
+                        </p>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

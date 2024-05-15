@@ -92,6 +92,7 @@ function PenaltiesPage() {
 
   return (
     <>
+      <NavBar />
       {loading ? (
         <Loading />
       ) : (
@@ -99,7 +100,7 @@ function PenaltiesPage() {
           className="container-fluid"
           style={{ width: window.innerWidth, marginLeft: "-12px" }}
         >
-          <NavBar />
+
           <div className="container pt-4 text-center">
             <h2>المخالفات</h2>
           </div>
@@ -200,16 +201,16 @@ function PenaltiesPage() {
                       {i.week_day === "Sunday"
                         ? "الأحد"
                         : i.week_day === "Monday"
-                        ? "الأثنين"
-                        : i.week_day === "Tuesday"
-                        ? "الثلاثاء"
-                        : i.week_day === "Wednesday"
-                        ? "الاربعاء"
-                        : i.week_day === "Thursday"
-                        ? "الخميس"
-                        : i.week_day === "Friday"
-                        ? "الجمعة"
-                        : "السبت"}
+                          ? "الأثنين"
+                          : i.week_day === "Tuesday"
+                            ? "الثلاثاء"
+                            : i.week_day === "Wednesday"
+                              ? "الاربعاء"
+                              : i.week_day === "Thursday"
+                                ? "الخميس"
+                                : i.week_day === "Friday"
+                                  ? "الجمعة"
+                                  : "السبت"}
                     </td>
                   </tr>
                 ))}

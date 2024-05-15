@@ -1,4 +1,6 @@
-const Biker_System_URL = "https://portal.foodbi.giize.com/api/";
+// const Biker_System_URL = "https://portal.foodbi.giize.com/api/";
+// const Biker_System_URL = "http://0.0.0.0:8090/";
+const Biker_System_URL = "http://0.0.0.0:8090/api/";
 
 const SortDays = (data) => {
   const dayOrder = {
